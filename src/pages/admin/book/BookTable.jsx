@@ -66,8 +66,13 @@ const BookTable = () => {
       sorter: true,
     },
     {
-      title: "UpdatedAt",
-      dataIndex: "updatedAt",
+      title: "Quantity",
+      dataIndex: "quantity",
+      sorter: true,
+    },
+    {
+      title: "Sold",
+      dataIndex: "sold",
       sorter: true,
     },
     {
@@ -128,7 +133,7 @@ const BookTable = () => {
 
   let [listBook, setListBook] = useState([]);
   let [current, setCurrent] = useState(1);
-  let [pageSize, setPageSize] = useState(2);
+  let [pageSize, setPageSize] = useState(5);
   let [total, setTotal] = useState(0);
   let [sortQuery, setSortQuery] = useState("-updatedAt");
   let [openViewDetail, setOpenViewDetail] = useState(false);

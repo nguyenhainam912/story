@@ -309,7 +309,8 @@ const Home = () => {
                   <Col span={4} onClick={() => handleRedirectBook(item)}>
                     <div className="thumbnail">
                       <Image
-                        // width={50}
+                        //  width={200}
+                          height={190}
                         preview={false}
                         src={`${import.meta.env.VITE_BACKEND_URL}/images/book/${
                           item.thumbnail

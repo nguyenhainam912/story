@@ -15,6 +15,7 @@ const LoginPage = () => {
     const {username, password} = values;
     setIsSubmit(true)
     const res = await callLogin(username, password);
+    console.log(res)
     setIsSubmit(false)
     if(res?.data) {
       localStorage.setItem('access_token', res.data.access_token)

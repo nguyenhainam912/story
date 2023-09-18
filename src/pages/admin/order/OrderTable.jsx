@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { callListOrder } from "../../../service/api";
 import { Table } from "antd";
 import { useState } from "react";
+import ReactJson from "react-json-view";
 
 const OrderTable = () => {
   const [dataTable, setDataTable] = useState([]);
@@ -32,9 +33,14 @@ const OrderTable = () => {
       key: "phone",
     },
     {
-      title: "UpdatedAt",
-      dataIndex: "updatedAt",
-      key: "updatedAt",
+      title: "Detail",
+      dataIndex: "detail",
+      key: "detail",
+      render: (detail) => (
+        <>
+          <ReactJson src={detail} collapsed={true} />
+        </>
+      ),
     },
   ];
 
@@ -48,7 +54,7 @@ const OrderTable = () => {
           name: item.name,
           address: item.address,
           phone: item.phone,
-          updatedAt: item.updatedAt,
+          detail: item.detail
         };
       });
       console.log("a", a);
