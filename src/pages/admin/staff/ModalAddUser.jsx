@@ -7,9 +7,8 @@ const ModalAddUser = (props) => {
   const [isSubmit, setIsSubmit] = useState(false);
 
   const onFinish = async (values) => {
-    const { fullName, password, email, phone ,address} = values;
-    const role ="ADMIN"
-
+    const { fullName, password, email, phone, address } = values;
+    const role ="USER"
     setIsSubmit(true);
     const res = await callAddNewUser(fullName, password, email, phone, address, role);
     if (res && res.data) {
@@ -30,7 +29,7 @@ const ModalAddUser = (props) => {
   };
   return (
     <Modal
-      title="Add New Manager"
+      title="Add New Staff"
       open={props.openModalAddUser}
       onOk={() => {
         form.submit();
@@ -51,7 +50,7 @@ const ModalAddUser = (props) => {
         form={form}
       >
         <Form.Item
-          label="Tên"
+          label="Full name"
           name="fullName"
           rules={[{ required: true, message: "Please input your full name!" }]}
         >
@@ -75,7 +74,7 @@ const ModalAddUser = (props) => {
         </Form.Item>
 
         <Form.Item
-          label="Số điện thoại"
+          label="Phone"
           name="phone"
           rules={[{ required: true, message: "Please input your phone!" }]}
         >
@@ -83,14 +82,12 @@ const ModalAddUser = (props) => {
         </Form.Item>
 
         <Form.Item
-          label="Đia chỉ"
+          label="Địa chỉ"
           name="address"
           rules={[{ required: true, message: "Please input your address!" }]}
         >
           <Input />
         </Form.Item>
-
-        
       </Form>
     </Modal>
   );

@@ -8,24 +8,18 @@ import {
   message,
   notification,
 } from "antd";
-import { callDeleteUser, callGetListUser } from "./../../../service/api";
+import { callDeleteUser, callGetListUser } from "../../../service/api";
 import { useEffect, useState } from "react";
-import DetailUser from "./DetailUser";
 import {
   AiOutlineDownload,
   AiOutlineExport,
   AiOutlinePlus,
   AiOutlineReload,
 } from "react-icons/ai";
-import ModalAddUser from "./ModalAddUser";
-import ModalImport from "./ModalImport";
-import * as XLSX from "xlsx";
-import ModalUpdateUser from "./ModalUpdate";
 import { WarningTwoTone } from "@ant-design/icons";
-import InputSearch from "./InputSearch";
 
 
-const UserTable = () => {
+const CustomerTable = () => {
   const columns = [
     {
       title: "id",
@@ -52,11 +46,6 @@ const UserTable = () => {
       sorter: true,
     },
     {
-      title: "Email",
-      dataIndex: "email",
-      sorter: true,
-    },
-    {
       title: "Số điện thoại",
       dataIndex: "phone",
       sorter: true,
@@ -73,15 +62,6 @@ const UserTable = () => {
         return (
           <div key={index}>
             <Space>
-              <Button
-                onClick={() => {
-                  setOpenModalUpdate(true);
-                  setDataUpdate(record);
-                }}
-              >
-                update
-              </Button>
-
               <Popover
                 placement="left"
                 title={() => (
@@ -126,12 +106,7 @@ const UserTable = () => {
   let [current, setCurrent] = useState(1);
   let [pageSize, setPageSize] = useState(5);
   let [total, setTotal] = useState(0);
-  let [openViewDetail, setOpenViewDetail] = useState(false);
-  let [dataDetail, setDataDetail] = useState([]);
-  let [openModalAddUser, setOpenModalAddUser] = useState(false);
-  let [openModalImport, setOpenModalImport] = useState(false);
-  let [openModalUpdate, setOpenModalUpdate] = useState(false);
-  let [dataUpdate, setDataUpdate] = useState({});
+;
 
   const onChange = (pagination, filters, sorter, extra) => {
     console.log("params", pagination, filters, sorter, extra);
@@ -153,7 +128,7 @@ const UserTable = () => {
   };
 
   const callSortUser = async (field) => {
-    const query = `current=${current}&pageSize=${pageSize}&sort=${field}&role=ADMIN`;
+    const query = `current=${current}&pageSize=${pageSize}&sort=${field}&role=CUSTOMER`;
     const res = await callGetListUser(query);
     if (res && res.data) {
       setListUser(res.data.result);
@@ -162,7 +137,7 @@ const UserTable = () => {
   };
 
   const callGetUser = async () => {
-    const query = `current=${current}&pageSize=${pageSize}&role=ADMIN`;
+    const query = `current=${current}&pageSize=${pageSize}&role=CUSTOMER`;
     const res = await callGetListUser(query);
     if (res && res.data) {
       setListUser(res.data.result);
@@ -170,24 +145,12 @@ const UserTable = () => {
     }
   };
 
-  const onClose = () => {
-    setOpenViewDetail(false);
-  };
 
-  const handleExportData = () => {
-    console.log("ee");
-    if (listUser.length > 0) {
-      const worksheet = XLSX.utils.json_to_sheet(listUser);
-      const workbook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-      XLSX.writeFile(workbook, "ExportUser.csv");
-    }
-  };
 
   const renderHeader = () => {
     return (
       <Row justify="space-between" align="center ">
-        <p>Table List Manager</p>
+        <p>Table List Customer</p>
         <div style={{ display: "flex", gap: "10px" }}>
           {/* <Button
             type="primary"
@@ -209,14 +172,14 @@ const UserTable = () => {
           >
             Import
           </Button> */}
-          <Button
+          {/* <Button
             type="primary"
             icon={<AiOutlinePlus />}
             style={{ display: "flex", alignItems: "center", gap: 6 }}
             onClick={showModalAddUser}
           >
             Add
-          </Button>
+          </Button> */}
           {/* <Button
             icon={<AiOutlineReload />}
             style={{
@@ -228,34 +191,6 @@ const UserTable = () => {
         </div>
       </Row>
     );
-  };
-
-  const showModalAddUser = () => {
-    setOpenModalAddUser(true);
-  };
-
-  const handleOkModalAddUser = () => {
-    setOpenModalAddUser(false);
-  };
-
-  const handleCancelModalAddUser = () => {
-    setOpenModalAddUser(false);
-  };
-
-  const showModalImport = () => {
-    setOpenModalImport(true);
-  };
-
-  const handleOkModalImport = () => {
-    setOpenModalAddUser(false);
-  };
-
-  const handleCancelModalImport = () => {
-    setOpenModalImport(false);
-  };
-
-  const handleCancelModalUpdate = () => {
-    setOpenModalUpdate(false);
   };
 
   const deleteUser = async (id) => {
@@ -271,21 +206,6 @@ const UserTable = () => {
     }
   };
 
-  const updateUser = async (user) => {
-    await updateUser({
-      _id: user._id,
-      fullName: user.fullName,
-      phone: user.phone,
-    });
-    message.success("Update User Successful");
-  };
-
-  const handleSearch = (data) => {
-    console.log("search", data);
-    setListUser(data);
-    setPageSize(data.length);
-    setTotal(data.length);
-  };
 
   useEffect(() => {
     callGetUser();
@@ -293,7 +213,6 @@ const UserTable = () => {
 
   return (
     <>
-      <InputSearch handleSearch={handleSearch} />
       <Table
         title={renderHeader}
         columns={columns}
@@ -314,39 +233,8 @@ const UserTable = () => {
           },
         }}
       />
-      {openViewDetail === true && (
-        <DetailUser
-          openViewDetail={openViewDetail}
-          dataDetail={dataDetail}
-          onClose={onClose}
-        />
-      )}
-      {openModalAddUser === true && (
-        <ModalAddUser
-          openModalAddUser
-          callGetUser={callGetUser}
-          handleOkModalAddUser={handleOkModalAddUser}
-          handleCancelModalAddUser={handleCancelModalAddUser}
-        />
-      )}
-      {openModalImport === true && (
-        <ModalImport
-          openModalImport
-          callGetUser={callGetUser}
-          handleOkModalImport={handleOkModalImport}
-          handleCancelModalImport={handleCancelModalImport}
-        />
-      )}
-      {openModalUpdate === true && (
-        <ModalUpdateUser
-          openModalUpdate
-          dataUpdate={dataUpdate}
-          callGetUser={callGetUser}
-          handleCancelModalUpdate={handleCancelModalUpdate}
-        />
-      )}
     </>
   );
 };
 
-export default UserTable;
+export default CustomerTable;

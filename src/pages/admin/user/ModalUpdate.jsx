@@ -8,9 +8,9 @@ const ModalUpdateUser = ({ ...props }) => {
     props;
   const [isSubmit, setIsSubmit] = useState(false);
   const onFinish = async (values) => {
-    const { _id, fullName, phone } = values;
+    const { _id, fullName, phone,address } = values;
     setIsSubmit(true);
-    const res = await updateUser(_id, fullName, phone);
+    const res = await updateUser(_id, fullName, phone,address);
     if (res && res.data) {
       message.success("Update User Success");
       handleCancelModalUpdate();
@@ -31,7 +31,7 @@ const ModalUpdateUser = ({ ...props }) => {
   }, [dataUpdate]);
   return (
     <Modal
-      title="Basic Modal"
+      title="Update Manager"
       open={openModalUpdate}
       onOk={() => {
         form.submit();
@@ -67,7 +67,7 @@ const ModalUpdateUser = ({ ...props }) => {
           <Input disabled />
         </Form.Item>
         <Form.Item
-          label="Full name"
+          label="Tên"
           name="fullName"
           rules={[{ required: true, message: "Please input your full name!" }]}
         >
@@ -78,6 +78,14 @@ const ModalUpdateUser = ({ ...props }) => {
           label="Phone"
           name="phone"
           rules={[{ required: true, message: "Please input your phone!" }]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="Địa chỉ"
+          name="address"
+          rules={[{ required: true, message: "Please input your address!" }]}
         >
           <Input />
         </Form.Item>

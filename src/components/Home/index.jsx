@@ -20,7 +20,7 @@ const Home = () => {
   const [currentTab, setCurrentTab] = useState("popular");
   const [category, setCategory] = useState([]);
   const [current, setCurrent] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(12);
   const [total, setTotal] = useState(10);
   const [sortQuery, setSortQuery] = useState("-sold");
   const [filter, setFilter] = useState("");
@@ -257,7 +257,7 @@ const Home = () => {
           >
             APPLY
           </Button>
-          <Col>
+          {/* <Col>
             <Form
               name="basic"
               //   labelCol={{ span: 8 }}
@@ -285,7 +285,7 @@ const Home = () => {
                 </Col>
               </Form.Item>
             </Form>
-          </Col>
+          </Col> */}
         </Col>
         <Col
           xs={24}

@@ -62,13 +62,13 @@ const ModalAddBook = (props) => {
       });
       return;
     }
-    if (dataSlider.length === 0) {
-      notification.error({
-        message: "Error",
-        description: "Please choose slider",
-      });
-      return;
-    }
+    // if (dataSlider.length === 0) {
+    //   notification.error({
+    //     message: "Error",
+    //     description: "Please choose slider",
+    //   });
+    //   return;
+    // }
 
     const { mainText, author, price, sold, quantity, category } = values;
     const thumbnail = dataThumbnail[0].name;
@@ -134,6 +134,7 @@ const ModalAddBook = (props) => {
 
   const handleUploadFileThumbnail = async ({ file, onSuccess, onError }) => {
     const res = await callUploadBookImg(file);
+    console.log('res', res)
     if (res && res.data) {
       setDataThumbnail([
         {
@@ -320,7 +321,7 @@ const ModalAddBook = (props) => {
                 </Upload>
               </Form.Item>
             </Col>
-            <Col span={12}>
+            {/* <Col span={12}>
               <Form.Item labelCol={{ span: 24 }} label="Slider" name="slider">
                 <Upload
                   multiple
@@ -339,7 +340,7 @@ const ModalAddBook = (props) => {
                   </div>
                 </Upload>
               </Form.Item>
-            </Col>
+            </Col> */}
           </Row>
         </Form>
       </Modal>

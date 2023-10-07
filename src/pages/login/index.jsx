@@ -21,7 +21,7 @@ const LoginPage = () => {
       localStorage.setItem('access_token', res.data.access_token)
       dispatch(doLoginAction(res.data.user))
       message.success('Login success')
-      navigate('/')
+      navigate('/admin')
     }else {
       notification.error({
         message: "Error",

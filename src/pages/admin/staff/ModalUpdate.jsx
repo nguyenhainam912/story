@@ -1,42 +1,43 @@
 import { Form, Input, Modal, message, notification } from "antd";
-import { useState } from "react";
-import { callAddNewUser } from "../../../service/api";
+import { useEffect, useState } from "react";
+import { updateUser } from "../../../service/api";
 
-const ModalAddUser = (props) => {
+const ModalUpdateUser = ({ ...props }) => {
   const [form] = Form.useForm();
+  const { openModalUpdate, handleCancelModalUpdate, dataUpdate, callGetUser } =
+    props;
   const [isSubmit, setIsSubmit] = useState(false);
-
   const onFinish = async (values) => {
-    const { fullName, password, email, phone ,address} = values;
-    const role ="ADMIN"
-
+    const { _id, fullName, phone, address } = values;
     setIsSubmit(true);
-    const res = await callAddNewUser(fullName, password, email, phone, address, role);
+    const res = await updateUser(_id, fullName, phone, address);
     if (res && res.data) {
-      message.success("Create new user successfully");
-      form.resetFields();
-      props.handleOkModalAddUser();
-      props.callGetUser();
+      message.success("Update User Success");
+      handleCancelModalUpdate();
+      setIsSubmit(false);
+      await callGetUser();
     } else {
       notification.error({
         message: "Error",
         description: res.message,
       });
     }
-    setIsSubmit(false);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+  useEffect(() => {
+    form.setFieldsValue(dataUpdate);
+  }, [dataUpdate]);
   return (
     <Modal
-      title="Add New Manager"
-      open={props.openModalAddUser}
+      title="Update Staff"
+      open={openModalUpdate}
       onOk={() => {
         form.submit();
       }}
       okText="Add"
-      onCancel={props.handleCancelModalAddUser}
+      onCancel={() => handleCancelModalUpdate()}
       confirmLoading={isSubmit}
     >
       <Form
@@ -51,27 +52,26 @@ const ModalAddUser = (props) => {
         form={form}
       >
         <Form.Item
-          label="Tên"
-          name="fullName"
-          rules={[{ required: true, message: "Please input your full name!" }]}
+          hidden
+          label="Id"
+          name="_id"
+          rules={[{ required: true, message: "Please input your id!" }]}
         >
-          <Input />
+          <Input disabled />
         </Form.Item>
-
         <Form.Item
           label="Email"
           name="email"
           rules={[{ required: true, message: "Please input your email!" }]}
         >
-          <Input />
+          <Input disabled />
         </Form.Item>
-
         <Form.Item
-          label="Password"
-          name="password"
-          rules={[{ required: true, message: "Please input your password!" }]}
+          label="Tên"
+          name="fullName"
+          rules={[{ required: true, message: "Please input your full name!" }]}
         >
-          <Input.Password />
+          <Input />
         </Form.Item>
 
         <Form.Item
@@ -83,17 +83,15 @@ const ModalAddUser = (props) => {
         </Form.Item>
 
         <Form.Item
-          label="Đia chỉ"
+          label="Địa chỉ"
           name="address"
           rules={[{ required: true, message: "Please input your address!" }]}
         >
           <Input />
         </Form.Item>
-
-        
       </Form>
     </Modal>
   );
 };
 
-export default ModalAddUser;
+export default ModalUpdateUser;

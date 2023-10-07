@@ -30,8 +30,16 @@ export const callGetListUser = (query) => {
   return axios.get(`/api/v1/user?${query}`);
 };
 
-export const callAddNewUser = (fullName, password, email, phone) => {
-  return axios.post(`/api/v1/user`, { fullName, password, email, phone });
+export const callGetListStaff = () => {
+  return axios.get(`/api/v1/user/staff`);
+};
+
+// export const callGetUserById = (id) => {
+//   return axios.get(`/api/v1/user/${id}`);
+// };
+
+export const callAddNewUser = (fullName, password, email, phone, address, role) => {
+  return axios.post(`/api/v1/user`, { fullName, password, email, phone, address , role});
 };
 
 export const callBulkCreateUser = (data) => {
@@ -42,8 +50,8 @@ export const callDeleteUser = (id) => {
   return axios.delete(`/api/v1/user/${id}`);
 };
 
-export const updateUser = (_id, fullName, phone) => {
-  return axios.put(`/api/v1/user`, { _id, fullName, phone });
+export const updateUser = (_id, fullName, phone, address) => {
+  return axios.put(`/api/v1/user`, { _id, fullName, phone, address});
 };
 
 // book
@@ -53,6 +61,10 @@ export const callGetListBook = (query) => {
 
 export const callAddNewBook = (mainText, category, author, price) => {
   return axios.post(`/api/v1/book`, { mainText, category, author, price });
+};
+
+export const callGetBook = () => {
+  return axios.get(`/api/v1/book/book`);
 };
 
 export const callCategory = () => {
@@ -70,7 +82,7 @@ export const callUploadBookImg = (fileImg) => {
     headers: {
       "Content-Type": "multipart/form-data",
 
-      "upload-type": "book",
+      "upload_type": "book",
     },
   });
 };
@@ -128,6 +140,10 @@ export const callGetBookById = (id) => {
   return axios.get(`/api/v1/book/${id}`);
 };
 
+export const callGetBookByName = (name) => {
+  return axios.get(`/api/v1/book/mainText/${name}`);
+};
+
 export const callPlaceOrder = (data) => {
   return axios.post(`/api/v1/order`, { ...data });
 };
@@ -147,7 +163,7 @@ export const callUploadAvatar = (fileImg) => {
     headers: {
       "Content-Type": "multipart/form-data",
 
-      "upload-type": "avatar",
+      "upload_type": "avatar",
     },
   });
 };
@@ -168,8 +184,8 @@ export const callUpdatePassword = (email, oldpass, newpass) => {
   });
 };
 
-export const callListOrder = () => {
-  return axios.get("api/v1/order");
+export const callListOrder = (query) => {
+  return axios.get(`api/v1/order?${query}`);
 };
 
 export const callDashBoard = () => {

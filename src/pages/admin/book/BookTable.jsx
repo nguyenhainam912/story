@@ -40,7 +40,8 @@ const BookTable = () => {
               setDataDetail(record);
             }}
           >
-            {record._id}
+            {index}
+            {/* {record._id} */}
           </a>
         );
       },

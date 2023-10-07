@@ -8,7 +8,7 @@ import {
   message,
   notification,
 } from "antd";
-import { callDeleteUser, callGetListUser } from "./../../../service/api";
+import { callDeleteUser, callGetListUser } from "../../../service/api";
 import { useEffect, useState } from "react";
 import DetailUser from "./DetailUser";
 import {
@@ -18,7 +18,6 @@ import {
   AiOutlineReload,
 } from "react-icons/ai";
 import ModalAddUser from "./ModalAddUser";
-import ModalImport from "./ModalImport";
 import * as XLSX from "xlsx";
 import ModalUpdateUser from "./ModalUpdate";
 import { WarningTwoTone } from "@ant-design/icons";
@@ -153,7 +152,7 @@ const UserTable = () => {
   };
 
   const callSortUser = async (field) => {
-    const query = `current=${current}&pageSize=${pageSize}&sort=${field}&role=ADMIN`;
+    const query = `current=${current}&pageSize=${pageSize}&sort=${field}&role=USER`;
     const res = await callGetListUser(query);
     if (res && res.data) {
       setListUser(res.data.result);
@@ -162,7 +161,7 @@ const UserTable = () => {
   };
 
   const callGetUser = async () => {
-    const query = `current=${current}&pageSize=${pageSize}&role=ADMIN`;
+    const query = `current=${current}&pageSize=${pageSize}&role=USER`;
     const res = await callGetListUser(query);
     if (res && res.data) {
       setListUser(res.data.result);
@@ -187,7 +186,7 @@ const UserTable = () => {
   const renderHeader = () => {
     return (
       <Row justify="space-between" align="center ">
-        <p>Table List Manager</p>
+        <p>Table List Staff</p>
         <div style={{ display: "flex", gap: "10px" }}>
           {/* <Button
             type="primary"

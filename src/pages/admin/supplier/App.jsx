@@ -23,7 +23,6 @@ import OrderPage from "./pages/order/OrderPage";
 import HistoryPage from "./pages/history/HistoryPage";
 import DashBoardPage from "./pages/admin/dashboard";
 import OrderTable from "./pages/admin/order/OrderTable";
-import CustomerTable from "./pages/admin/customer/CustomerTable";
 const Layout = () => {
   return (
     <div className="layout-app">
@@ -106,14 +105,6 @@ export default function App() {
           element: (
             <>
               <SupplierTable />
-            </>
-          ),
-        },
-        {
-          path: "customer",
-          element: (
-            <>
-              <CustomerTable />
             </>
           ),
         },

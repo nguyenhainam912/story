@@ -59,12 +59,11 @@ const OrderPage = () => {
     form.submit();
   };
   const onFinish = async (values) => {
-    console.log(values);
     const detailOrder = books.map((item) => {
       return {
         bookName: item.detail.mainText,
         quantity: item.quantity,
-        _id: item._id,
+        price: item.detail.price,
       };
     });
     const data = {
@@ -74,16 +73,18 @@ const OrderPage = () => {
       totalPrice: totalPrice,
       detail: detailOrder,
     };
-    const res = await callPlaceOrder(data);
-    if (res && res.data) {
-      message.success("Order success !");
-      dispatch(doPlaceOrderAction());
-      setCurrentStep(2);
-    } else {
-      notification.error({
-        message: "Error",
-        description: res.message,
-      });
+    if (data) {
+      const res = await callPlaceOrder(data);
+      if (res && res.data) {
+        message.success("Order success !");
+        dispatch(doPlaceOrderAction());
+        setCurrentStep(2);
+      } else {
+        notification.error({
+          message: "Error",
+          description: res.message,
+        });
+      }
     }
   };
 
@@ -376,11 +377,11 @@ const OrderPage = () => {
         <Result
           icon={<SmileOutlined />}
           title="Great, Order success!"
-          extra={
-            <Button type="primary" onClick={() => navigate("/history")}>
-              History
-            </Button>
-          }
+          // extra={
+          //   <Button type="primary" onClick={() => navigate("/history")}>
+          //     History
+          //   </Button>
+          // }
         />
       )}
     </>

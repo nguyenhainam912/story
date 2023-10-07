@@ -26,10 +26,10 @@ const Header = () => {
       label: <a onClick={() => setOpenModalInfo(true)}>Infomation</a>,
       key: "0",
     },
-    {
-      label: <a onClick={() => navigate("/history")}>History</a>,
-      key: "1",
-    },
+    // {
+    //   label: <a onClick={() => navigate("/history")}>History</a>,
+    //   key: "1",
+    // },
     {
       type: "divider",
     },
@@ -123,7 +123,7 @@ const Header = () => {
           </p>
         </Col>
         <Col span={10} className="search">
-          <AutoComplete
+          {/* <AutoComplete
             dropdownMatchSelectWidth={252}
             style={{ width: 300 }}
             //   options={options}
@@ -131,7 +131,7 @@ const Header = () => {
             //   onSearch={handleSearch}
           >
             <Input.Search size="large" placeholder="input here" enterButton />
-          </AutoComplete>
+          </AutoComplete> */}
         </Col>
         <Col span={6} className="right">
           <Row

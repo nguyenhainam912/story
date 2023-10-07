@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { doLogoutAction } from "../../redux/account/accountSlide";
 import { callLogout } from "../../service/api";
+import ModalInfo from "../../components/Header/ModalInfo";
 
 const AdminPage = ({ children }) => {
   const { Header, Sider, Content } = Layout;
@@ -26,17 +27,22 @@ const AdminPage = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.account.isAuthenticated);
   const user = useSelector((state) => state.account.user);
   const navigate = useNavigate();
+  const [openModalInfo, setOpenModalInfo] = useState(false);
   const items = [
     {
-      label: <a href="#">Infomation</a>,
+      label: <a onClick={() => setOpenModalInfo(true)}>Infomation</a>,
       key: "0",
     },
+    // {
+    //   label: <a href="/">Home</a>,
+    //   key: "1",
+    // },
     {
       type: "divider",
     },
     {
       label: <p onClick={() => handleLogout()}>Logout</p>,
-      key: "1",
+      key: "2",
     },
   ];
   const dispatch = useDispatch();
@@ -58,6 +64,7 @@ const AdminPage = ({ children }) => {
     user?.avatar
   }`;
   return (
+    <>
     <Layout style={{ minHeight: "96vh", color: "#fff" }}>
       <Sider
         trigger={null}
@@ -82,29 +89,53 @@ const AdminPage = ({ children }) => {
               label: "Dashboard",
               onClick: () => navigate("/admin"),
             },
+            // {
+            //   key: "2",
+            //   icon: <AiOutlineUser />,
+            //   label: "Manage Users",
+            //   children: [
+            //     {
+            //       key: "5",
+            //       icon: <AiOutlineUsergroupDelete />,
+            //       label: "CRUD",
+            //       onClick: () => navigate("/admin/user"),
+            //     },
+            //   ],
+            // },
             {
               key: "2",
-              icon: <AiOutlineUser />,
-              label: "Manage Users",
-              children: [
-                {
-                  key: "5",
-                  icon: <AiOutlineUsergroupDelete />,
-                  label: "CRUD",
-                  onClick: () => navigate("/admin/user"),
-                },
-              ],
+              icon: <AiOutlineUsergroupDelete />,
+              label: "Người quản lý",
+              onClick: () => navigate("/admin/user"),
+            },
+            {
+              key: "22",
+              icon: <AiOutlineUsergroupDelete />,
+              label: "Nhân viên",
+              onClick: () => navigate("/admin/staff"),
+            },
+            {
+              key: "23",
+              icon: <AiOutlineUsergroupDelete />,
+              label: "Nhà Cung Cấp",
+              onClick: () => navigate("/admin/supplier"),
+            },
+            {
+              key: "24",
+              icon: <AiOutlineUsergroupDelete />,
+              label: "Khách hàng",
+              onClick: () => navigate("/admin/customer"),
             },
             {
               key: "3",
               icon: <AiOutlineBook />,
-              label: "Manage Book",
+              label: "Thông tin sách",
               onClick: () => navigate("/admin/book"),
             },
             {
               key: "4",
               icon: <AiOutlineDollarCircle />,
-              label: "Manage Orders",
+              label: "Đơn hàng",
               onClick: () => navigate("/admin/order"),
             },
           ]}
@@ -157,6 +188,14 @@ const AdminPage = ({ children }) => {
         </Content>
       </Layout>
     </Layout>
+    {openModalInfo && (
+      <ModalInfo
+        openModalInfo={openModalInfo}
+        setOpenModalInfo={setOpenModalInfo}
+      ></ModalInfo>
+    )}
+    </>
+
   );
 };
 
