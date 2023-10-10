@@ -1,6 +1,7 @@
 import {
   Button,
   Form,
+  Image,
   Popover,
   Row,
   Space,
@@ -47,34 +48,50 @@ const BookTable = () => {
       },
     },
     {
-      title: "Book",
+      title: "Tên sách",
       dataIndex: "mainText",
       sorter: true,
     },
     {
-      title: "Category",
+      title: "Thể loại",
       dataIndex: "category",
       sorter: true,
     },
     {
-      title: "Author",
+      title: "Tác giả",
       dataIndex: "author",
       sorter: true,
     },
     {
-      title: "Price",
+      title: "Giá bán",
       dataIndex: "price",
       sorter: true,
     },
     {
-      title: "Quantity",
+      title: "Số lượng",
       dataIndex: "quantity",
       sorter: true,
     },
     {
-      title: "Sold",
+      title: "Đã bán",
       dataIndex: "sold",
       sorter: true,
+    },
+    {
+      title: "Ảnh Sách",
+      dataIndex: "thumbnail",
+      render: (thumbnail) => {
+        return (
+          <Image
+            //  width={200}
+              height={50}
+            preview={false}
+            src={`${import.meta.env.VITE_BACKEND_URL}/images/book/${
+              thumbnail
+            }`}
+          />
+        );
+      },
     },
     {
       title: "Action",

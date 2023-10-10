@@ -130,7 +130,7 @@ const OrderTable = () => {
   const renderHeader = () => {
     return (
       <Row justify="space-between" align="center ">
-        <p>Table List Staff</p>
+        <p>Table List Order</p>
         <div style={{ display: "flex", gap: "10px" }}>
            <Button
             type="primary"
