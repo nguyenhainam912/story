@@ -7,7 +7,7 @@ const InputSearch = (props) => {
 
   const onFinish = async (values) => {
     const { fullName, email, phone } = values;
-    let query = "current=1";
+    let query = "current=1&role=ADMIN";
     if (fullName) {
       query += `&fullName=/${fullName}/i`;
     } else if (email) {

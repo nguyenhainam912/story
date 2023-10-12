@@ -33,7 +33,7 @@ const ModalAddOrder = (props) => {
     setIsSubmit(true);
     const res = await callPlaceOrder(data);
     if (res && res.data) {
-      message.success("Create new user successfully");
+      message.success("Create new order successfully");
       form.resetFields();
       props.handleOkModalAddOrder();
       props.getListOrder();
@@ -99,12 +99,12 @@ const ModalAddOrder = (props) => {
   return (
     <Modal
       title="Add New Order"
-      open={props.openModalAddUser}
+      open={props.showModalAddOrder}
       onOk={() => {
         form.submit();
       }}
       okText="Add"
-      onCancel={props.handleCancelModalAddUser}
+      onCancel={props.handleCancelModalAddOrder}
       confirmLoading={isSubmit}
       width={"50vw"}
 

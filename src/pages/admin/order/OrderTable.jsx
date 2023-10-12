@@ -194,6 +194,7 @@ const OrderTable = () => {
     <ModalAddOrder
       openModalAddUser
       getListOrder={getListOrder}
+      showModalAddOrder={showModalAddOrder}
       handleOkModalAddOrder={handleOkModalAddOrder}
       handleCancelModalAddOrder={handleCancelModalAddOrder}
     />
