@@ -1,4 +1,4 @@
-
+first run: npm i
 
 - React 18
 - React Router 6
