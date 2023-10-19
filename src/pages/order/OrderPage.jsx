@@ -72,7 +72,9 @@ const OrderPage = () => {
       phone: values.phone,
       totalPrice: totalPrice,
       detail: detailOrder,
+      staffName: 'abc',
     };
+    
     if (data) {
       const res = await callPlaceOrder(data);
       if (res && res.data) {
