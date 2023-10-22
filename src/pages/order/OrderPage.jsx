@@ -72,7 +72,7 @@ const OrderPage = () => {
       phone: values.phone,
       totalPrice: totalPrice,
       detail: detailOrder,
-      //staffName: 'abc',
+      staffName: 'abc',
     };
     
     if (data) {
